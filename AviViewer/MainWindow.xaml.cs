@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using NAudio.Wave;
+using System.Windows.Threading;
 
 namespace AviViewer
 {
@@ -22,11 +23,20 @@ namespace AviViewer
         private WaveOutEvent waveOut;
         private AudioFileReader audioFileReader;
         private bool isPaused = false;
+        private DispatcherTimer timer; 
 
         public MainWindow()
         {
             InitializeComponent();
             playPauseButton.Content = "pause";
+
+            
+            mediaElement.MediaEnded += MediaElement_MediaEnded;
+
+            
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += Timer_Tick;
         }
 
         private void OpenAviButton_Click(object sender, RoutedEventArgs e)
@@ -44,13 +54,16 @@ namespace AviViewer
 
         private void PlayAvi(string filePath)
         {
-            // Воспроизведение видео
+           
             mediaElement.Source = new Uri(filePath);
             mediaElement.Volume = VolumeSlider.Value;
             mediaElement.Play();
 
-            // Воспроизведение аудио
+           
             PlayAudio(filePath);
+
+            
+            timer.Start();
         }
 
         private void PlayAudio(string filePath)
@@ -62,6 +75,13 @@ namespace AviViewer
             waveOut.Play();
         }
 
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+           
+            mediaElement.Position = TimeSpan.Zero;
+            mediaElement.Play();
+        }
+
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             if (waveOut == null)
@@ -70,65 +90,90 @@ namespace AviViewer
             }
             if (isPaused)
             {
-                // Возобновление видео
+               
                 mediaElement.Play();
-
-                // Возобновление аудио
                 waveOut.Play();
+                timer.Start(); 
             }
             else
             {
-                // Пауза видео
+               
                 mediaElement.Pause();
-
-                // Пауза аудио
                 waveOut.Pause();
+                timer.Stop(); 
             }
 
-            if (isPaused)
-            {
-                playPauseButton.Content = "pause";
-            } else
-            {
-                playPauseButton.Content = "play";
-            }
+           
+            playPauseButton.Content = isPaused ? "pause" : "play";
             isPaused = !isPaused;
         }
 
         private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Устанавливаем громкость видео
+           
             mediaElement.Volume = VolumeSlider.Value;
 
-            // Устанавливаем громкость аудио
+            
             if (waveOut != null)
             {
                 waveOut.Volume = (float)VolumeSlider.Value;
             }
         }
 
-
         private void RemoveVideoButton_Click(object sender, RoutedEventArgs e)
         {
-            // Удаление видео
+            
             mediaElement.Source = null;
 
-            // Остановка и освобождение ресурсов аудио
+           
             waveOut?.Stop();
             waveOut?.Dispose();
             audioFileReader?.Dispose();
             waveOut = null;
             audioFileReader = null;
+
+            
+            timer.Stop();
+            PositionSlider.Value = 0;
+            CurrentPositionText.Text = "0:00";
+            TotalDurationText.Text = "0:00";
         }
 
         protected override void OnClosed(EventArgs e)
         {
-            // Освобождение ресурсов при закрытии приложения
+            
             waveOut?.Stop();
             waveOut?.Dispose();
             audioFileReader?.Dispose();
+            timer?.Stop();
             base.OnClosed(e);
         }
 
+        
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (mediaElement.NaturalDuration.HasTimeSpan)
+            {
+                PositionSlider.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+                PositionSlider.Value = mediaElement.Position.TotalSeconds;
+
+               
+                CurrentPositionText.Text = mediaElement.Position.ToString(@"mm\:ss");
+                TotalDurationText.Text = mediaElement.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
+            }
+        }
+
+       
+        private void PositionSlider_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        
+        private void PositionSlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            mediaElement.Position = TimeSpan.FromSeconds(PositionSlider.Value); 
+            timer.Start(); 
+        }
     }
 }
