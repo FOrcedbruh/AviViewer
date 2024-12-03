@@ -1,0 +1,21 @@
+﻿<Window x:Class="AviViewer.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AviViewer"
+        mc:Ignorable="d"
+        Icon="https://www.iconpacks.net/icons/1/free-video-icon-818-thumb.png"
+        Title="AuthWindow" Height="400" Width="300">
+    <Grid Background="#FFE3E3">
+        <Border Background="#789DBC" Margin="20" CornerRadius="20">
+            <StackPanel VerticalAlignment="Center">
+                <Label Foreground="#fff" Content="Имя" Margin="20 0 20 0"></Label>
+                <TextBox  FontSize="16" FontWeight="DemiBold" Foreground="Gray" x:Name="username" Margin="20 0 20 20"></TextBox>
+                <Label  Foreground="#fff" Content="Пароль" Margin="20 0 20 0"></Label>
+                <PasswordBox FontSize="16" FontWeight="DemiBold" Foreground="Gray" x:Name="password"  Margin="20 0 20 40"></PasswordBox>
+                <Button Click="Button_Click" Width="200" Background="#C9E9D2" Foreground="#789DBC">Войти</Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

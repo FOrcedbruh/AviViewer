@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/videoicon.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/pauseicon.png")]
 
 

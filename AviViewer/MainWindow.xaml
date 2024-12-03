@@ -17,17 +17,22 @@
         <Border Grid.Row="0" Padding="5">
             <WrapPanel Orientation="Horizontal">
                 <Button Background="#789DBC" FontWeight="Bold" Width="100" Content="Open AVI" Click="OpenAviButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
-                <Button Background="#789DBC" FontWeight="Bold" Width="100" Name="playPauseButton" Click="PauseButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,10,0,0"/>
                 <Button Background="#789DBC" FontWeight="Bold" Width="80" Content="Remove" Click="RemoveVideoButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"/>
             </WrapPanel>
         </Border>
         <Border Grid.Row="1" Background="#FFE3E3">
             <MediaElement  Name="mediaElement" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
         </Border>
-        <Border Grid.Row="2" Background="#789DBC">
+        <Border CornerRadius="20" Grid.Row="2" Background="#789DBC">
             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Slider  Name="PositionSlider" Minimum="0" Maximum="1" Value="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="600"
                 PreviewMouseDown="PositionSlider_PreviewMouseDown" PreviewMouseUp="PositionSlider_PreviewMouseUp"/>
+                <Button Background="Transparent" FontWeight="Bold" Width="100" Name="playPauseButton" Click="PauseButton_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50 0 20 0">
+                    <StackPanel  Orientation="Horizontal">
+                        <Image x:Name="playIcon" Source="Images/PlayIcon.png"  Width="20" Height="20"/>
+                        <Image x:Name="pauseIcon" Source="Images/PauseIcon.png"  Width="20" Height="20"/>
+                    </StackPanel>
+                </Button>
                 <Border HorizontalAlignment="Right">
                     <WrapPanel>
                         <TextBlock Name="CurrentPositionText" Text="0:00" Margin="0,0,10,0"/>
@@ -38,10 +43,13 @@
             </WrapPanel>
         </Border>
         <Border Grid.Row="3" Padding="20">
-            <StackPanel Background="#C9E9D2" Orientation="Vertical" HorizontalAlignment="Left">
-                <TextBlock Margin="10" Foreground="#fff" Text="Громкость" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Slider Background="#FFE3E3" x:Name="VolumeSlider" Minimum="0" Maximum="1" Value="0.6" 
-                VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" 
+            <StackPanel Background="#C9E9D2" Orientation="Vertical" HorizontalAlignment="Left" Margin="10 0 10 0">
+                <WrapPanel>
+                    <TextBlock Margin="10" Foreground="#789DBC" Text="Громкость" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Width="30" Margin="70 0 0 0" x:Name="VolumeText" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="DemiBold" Foreground="#789DBC"/>
+                </WrapPanel>
+                <Slider Background="#FFE3E3" x:Name="VolumeSlider" Minimum="0" Maximum="1" Value="0.6"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200"
                 Margin="10" ValueChanged="VolumeSlider_ValueChanged"/>
             </StackPanel>
         </Border>

@@ -36,3 +36,5 @@ C:\Users\Илья\source\repos\AviViewer\AviViewer\obj\Debug\AviViewer.csproj.Co
 C:\Users\Илья\source\repos\AviViewer\AviViewer\obj\Debug\AviViewer.exe
 C:\Users\Илья\source\repos\AviViewer\AviViewer\obj\Debug\AviViewer.pdb
 C:\Users\Илья\source\repos\AviViewer\AviViewer\obj\Debug\AviViewer.csproj.AssemblyReference.cache
+C:\Users\Илья\source\repos\AviViewer\AviViewer\obj\Debug\AuthWindow.g.cs
+C:\Users\Илья\source\repos\AviViewer\AviViewer\obj\Debug\AuthWindow.baml

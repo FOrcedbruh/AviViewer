@@ -28,12 +28,12 @@ namespace AviViewer
         public MainWindow()
         {
             InitializeComponent();
-            playPauseButton.Content = "pause";
 
             
             mediaElement.MediaEnded += MediaElement_MediaEnded;
 
-            
+            pauseIcon.Visibility = Visibility.Collapsed;
+            playIcon.Visibility = Visibility.Visible;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += Timer_Tick;
@@ -58,7 +58,6 @@ namespace AviViewer
             mediaElement.Source = new Uri(filePath);
             mediaElement.Volume = VolumeSlider.Value;
             mediaElement.Play();
-
            
             PlayAudio(filePath);
 
@@ -103,17 +102,31 @@ namespace AviViewer
                 timer.Stop(); 
             }
 
-           
-            playPauseButton.Content = isPaused ? "pause" : "play";
             isPaused = !isPaused;
+            if (!isPaused)
+            {
+                playIcon.Visibility = Visibility.Collapsed;
+                pauseIcon.Visibility = Visibility.Visible;
+            } else
+            {
+                playIcon.Visibility = Visibility.Visible;
+                pauseIcon.Visibility = Visibility.Collapsed;
+            }
+
+
+
+
+           
         }
 
         private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
            
             mediaElement.Volume = VolumeSlider.Value;
+            VolumeText.Text = (VolumeSlider.Value * 100).ToString();
 
-            
+
+
             if (waveOut != null)
             {
                 waveOut.Volume = (float)VolumeSlider.Value;
@@ -156,7 +169,6 @@ namespace AviViewer
             {
                 PositionSlider.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
                 PositionSlider.Value = mediaElement.Position.TotalSeconds;
-
                
                 CurrentPositionText.Text = mediaElement.Position.ToString(@"mm\:ss");
                 TotalDurationText.Text = mediaElement.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
