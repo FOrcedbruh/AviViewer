@@ -16,23 +16,33 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Padding="5">
             <WrapPanel Orientation="Horizontal">
-                <Button Background="#789DBC" FontWeight="Bold" Width="100" Content="Open AVI" Click="OpenAviButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
-                <Button Background="#789DBC" FontWeight="Bold" Width="80" Content="Remove" Click="RemoveVideoButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"/>
+                <Menu Width="50"  Height="20" Background="#789DBC" Foreground="#fff" Margin="10">
+                    <MenuItem Header="файл" Background="#789DBC">
+                        <MenuItem Background="#789DBC" Icon="+" Click="OpenAviButton_Click" Header="Открыть" Foreground="#000">
+                            Подтвердить
+                        </MenuItem>
+                        <MenuItem Background="#789DBC" Icon="-"  Click="RemoveVideoButton_Click" Header="Удалить" Foreground="#000">
+                            Подтвердить
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+                <Button Click="Button_Click" Margin="730 0 0 0" Height="20" Background="#C9E9D2" Width="70">справка</Button>
             </WrapPanel>
         </Border>
         <Border Grid.Row="1" Background="#FFE3E3">
             <MediaElement  Name="mediaElement" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
         </Border>
-        <Border CornerRadius="20" Grid.Row="2" Background="#789DBC">
+        <Border CornerRadius="20" Grid.Row="2" Background="#789DBC" Margin="0 5">
             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Slider  Name="PositionSlider" Minimum="0" Maximum="1" Value="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="600"
-                PreviewMouseDown="PositionSlider_PreviewMouseDown" PreviewMouseUp="PositionSlider_PreviewMouseUp"/>
                 <Button Background="Transparent" FontWeight="Bold" Width="100" Name="playPauseButton" Click="PauseButton_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50 0 20 0">
                     <StackPanel  Orientation="Horizontal">
                         <Image x:Name="playIcon" Source="Images/PlayIcon.png"  Width="20" Height="20"/>
                         <Image x:Name="pauseIcon" Source="Images/PauseIcon.png"  Width="20" Height="20"/>
                     </StackPanel>
                 </Button>
+                <Slider  Name="PositionSlider" Minimum="0" Maximum="1" Value="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="600"
+                PreviewMouseDown="PositionSlider_PreviewMouseDown" PreviewMouseUp="PositionSlider_PreviewMouseUp"/>
+                
                 <Border HorizontalAlignment="Right">
                     <WrapPanel>
                         <TextBlock Name="CurrentPositionText" Text="0:00" Margin="0,0,10,0"/>

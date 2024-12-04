@@ -187,5 +187,11 @@ namespace AviViewer
             mediaElement.Position = TimeSpan.FromSeconds(PositionSlider.Value); 
             timer.Start(); 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow infoWindow = new InfoWindow();
+            infoWindow.Show();
+        }
     }
 }

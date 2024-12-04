@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:AviViewer"
         mc:Ignorable="d"
         Icon="https://www.iconpacks.net/icons/1/free-video-icon-818-thumb.png"
-        Title="AuthWindow" Height="400" Width="300">
+        Title="Вход в аккаунт" Height="300" Width="280">
     <Grid Background="#FFE3E3">
         <Border Background="#789DBC" Margin="20" CornerRadius="20">
             <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Авторизация" TextAlignment="Center" Foreground="#fff"/>
                 <Label Foreground="#fff" Content="Имя" Margin="20 0 20 0"></Label>
                 <TextBox  FontSize="16" FontWeight="DemiBold" Foreground="Gray" x:Name="username" Margin="20 0 20 20"></TextBox>
                 <Label  Foreground="#fff" Content="Пароль" Margin="20 0 20 0"></Label>

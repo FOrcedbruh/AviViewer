@@ -26,9 +26,9 @@ namespace AviViewer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (password.Password == "" || username.Text == "")
+            if (password.Password != "qwerty123" || username.Text != "Валерия")
             {
-                MessageBox.Show("Вы не ввели данные");
+                MessageBox.Show("Неверное имя или пароль");
             } else
             {
                 MainWindow mainWindow = new MainWindow();
