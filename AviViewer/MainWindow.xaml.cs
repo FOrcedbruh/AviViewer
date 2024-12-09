@@ -25,6 +25,7 @@ namespace AviViewer
         private bool isPaused = false;
         private DispatcherTimer timer; 
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -192,6 +193,48 @@ namespace AviViewer
         {
             InfoWindow infoWindow = new InfoWindow();
             infoWindow.Show();
+        }
+
+        private void RestartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PositionSlider.Value = 0;
+            timer.Stop();
+            mediaElement.Position = TimeSpan.FromSeconds(0);
+            timer.Start();
+        }
+
+        private void speedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaElement.SpeedRatio == 2)
+            {
+                mediaElement.SpeedRatio = 1;
+            } else
+            {
+                mediaElement.SpeedRatio = 2;
+            }
+        }
+
+        private void speed125Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaElement.SpeedRatio == 1.25)
+            {
+                mediaElement.SpeedRatio = 1;
+            }
+            else
+            {
+                mediaElement.SpeedRatio = 1.25;
+            }
+        }
+
+        private void rewindBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaElement.Position.TotalSeconds > 0)
+            {
+                mediaElement.Position = mediaElement.Position.Subtract(TimeSpan.FromSeconds(0.05));
+            } else
+            {
+                mediaElement.Position = TimeSpan.Zero;
+            }
         }
     }
 }

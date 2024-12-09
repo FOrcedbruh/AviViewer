@@ -143,10 +143,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\PauseIcon.png" />
+    <Resource Include="Images\restartIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\PlayIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PauseIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\speedIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rewindIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
